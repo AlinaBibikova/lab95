@@ -7,12 +7,15 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static('public'));
+
+const users = require('./routes/users');
+
 app.use(cors());
 
 const port = 8000;
 
 mongoose.connect(config.dbUrl, config.mongoOptions).then( () => {
-
+    app.use('/users', users);
 });
 
 app.listen(port, () => {
