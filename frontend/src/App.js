@@ -6,7 +6,8 @@ import {logoutUser} from "./store/actions/usersActions";
 import {connect} from "react-redux";
 import {Route, Switch, withRouter} from "react-router";
 import {Container} from "reactstrap";
-import Toolbar from "./containers/UI/Toolbar/Toolbar";
+import Toolbar from "./components/UI/Toolbar/Toolbar";
+import Login from "./containers/Login/Login";
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                 <Container style={{marginTop: '20px'}}>
                     <Switch>
                         <Route path="/" exact component={Cocktails}/>
+                        <Route path="/login" component={Login}/>
                     </Switch>
                 </Container>
             </Fragment>

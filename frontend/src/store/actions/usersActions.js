@@ -31,7 +31,7 @@ export const logoutUser = () => {
     }
 };
 
-export const LoginUser = userData => {
+export const loginUser = userData => {
     return dispatch => {
         return axios.post('/users/sessions', userData)
             .then(
