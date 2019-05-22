@@ -32,6 +32,14 @@ router.get('/', auth, (req, res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    Cocktail.findById(req.params.id)
+        .then(result => {
+            if (result) return res.send(result);
+            res.sendStatus(404)})
+        .catch(() => res.sendStatus(500));
+});
+
 router.post('/', auth, upload.single('image'), (req, res) => {
     const cocktailData = req.body;
     if (req.file) {
