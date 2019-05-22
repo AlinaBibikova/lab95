@@ -4,6 +4,7 @@ import {Alert, Button, Form, FormGroup} from "reactstrap";
 
 import {loginUser} from "../../store/actions/usersActions";
 import FormElement from "../../components/UI/Form/FormElement";
+import FacebookLogin from "../../components/FacebookLogin/FacebookLogin";
 
 class Login extends Component {
     state = {
@@ -33,6 +34,10 @@ class Login extends Component {
                         </Alert>
                     )}
                     <Form onSubmit={this.submitFormHandler}>
+                        <FormGroup>
+                            <FacebookLogin/>
+                        </FormGroup>
+
                         <FormElement
                             propertyName="username"
                             type="text"

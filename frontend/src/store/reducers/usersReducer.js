@@ -1,6 +1,7 @@
 import {
     LOGIN_USER_FAILURE,
-    LOGIN_USER_SUCCESS, LOGOUT_USER,
+    LOGIN_USER_SUCCESS,
+    LOGOUT_USER_SUCCESS,
 } from "../actions/usersActions";
 
 const initialState = {
@@ -22,11 +23,9 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 loginError: action.error
             };
-        case LOGOUT_USER:
-            return {
-                ...state,
-                user: null
-            };
+        case LOGOUT_USER_SUCCESS:
+            return {...state, user: null};
+
         default:
             return state;
     }
