@@ -19,6 +19,18 @@ router.post('/sessions', async (req, res) => {
     return res.send({message: 'Login successful!', user});
 });
 
+router.delete('/sessions', async (req, res) => {
+    const token = req.get("Authorization");
+    if(!token) return res.send({message: "OK"});
+
+    const user = await User.findOne({token: token});
+    if(!user) return res.send({message: 'OK'});
+
+    await user.save();
+
+    return res.send({message: 'OK'});
+});
+
 router.post('/facebookLogin', async (req, res) => {
     const inputToken = req.body.accessToken;
     const accessToken = config.facebook.appId + '|' + config.facebook.appSecret;
