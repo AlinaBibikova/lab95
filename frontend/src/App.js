@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './App.css';
 import {NotificationContainer} from "react-notifications";
-import Cocktails from "./containers/Cocktails/Cocktails";
+import Items from "./containers/Items/Items";
 import {logoutUser} from "./store/actions/usersActions";
 import {connect} from "react-redux";
 import {Route, Switch, withRouter} from "react-router";
@@ -22,7 +22,7 @@ class App extends Component {
                     <Row>
                         <Col xs="12" md="12">
                             <Switch>
-                                 <Route path="/" exact component={Cocktails}/>
+                                 <Route path="/" exact component={Items}/>
                                   <Route path="/login" component={Login}/>
                             </Switch>
                         </Col>

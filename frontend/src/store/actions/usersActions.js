@@ -1,13 +1,9 @@
 import axios from '../../axios-api';
 import {push} from 'connected-react-router';
 import {NotificationManager} from "react-notifications";
-
-export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
+import {LOGIN_USER_FAILURE, LOGIN_USER_SUCCESS, LOGOUT_USER_SUCCESS} from "./actionTypes";
 
 const logoutUserSuccess = () => ({type: LOGOUT_USER_SUCCESS});
-
-export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
-export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 
 export const loginUserSuccess = user => ({type: LOGIN_USER_SUCCESS, user});
 export const loginUserFailure = error => ({type: LOGIN_USER_FAILURE, error});
