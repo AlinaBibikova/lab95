@@ -8,7 +8,6 @@ import ListItem from "../../components/ListItem/ListItem";
 class Items extends Component {
 
     componentDidMount() {
-        console.log(this.props.fetchItems());
         this.props.fetchItems();
     }
 
@@ -24,8 +23,6 @@ class Items extends Component {
                         id={item._id}
                         nameCocktail={item.nameCocktail}
                         image={item.image}
-                        recipe={item.recipe}
-                        ingredients={item.ingredients}
                         user={this.props.user}
                         onDelete={() => this.props.deleteItem(item._id)}
                         onTogglePublish={() => this.props.togglePublish(item._id)}
@@ -35,7 +32,6 @@ class Items extends Component {
         );
     }
 }
-
 
 const mapStateToProps = state => ({
     user: state.users.user,
@@ -47,7 +43,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchItems: () => dispatch(fetchItems()),
     deleteItem: id => dispatch(deleteItem(id)),
-    togglePublish: (id, data) => dispatch(togglePublish(id, data))
+    togglePublish: id => dispatch(togglePublish(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Items);

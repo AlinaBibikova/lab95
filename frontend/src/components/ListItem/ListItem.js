@@ -22,7 +22,6 @@ const ListItem = props => {
                         {props.nameCocktail}
                     </CardTitle>
                     <CardText>{props.user}</CardText>
-                    <CardText>{props.recipe}</CardText>
                 </CardBody>
             </Card>
         </Col>
