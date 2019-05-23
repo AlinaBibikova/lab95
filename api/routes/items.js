@@ -4,6 +4,7 @@ const config = require('../config');
 const nanoid = require('nanoid');
 const auth = require('../middleware/auth');
 const permit = require('../middleware/permit');
+const checkUser = require('../middleware/checkUser');
 
 const Cocktail = require('../models/Item');
 
@@ -19,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 const router = express.Router();
 
-router.get('/', auth, async (req, res) => {
+router.get('/', checkUser, async (req, res) => {
     const criteria = {isPublished: true};
 
     if (req.user && req.user.role === 'admin') {
@@ -34,7 +35,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkUser, async (req, res) => {
     const criteria = {isPublished: true, _id: req.params.id};
 
     if (req.user && req.user.role === 'admin') {
