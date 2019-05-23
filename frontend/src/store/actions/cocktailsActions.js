@@ -55,12 +55,12 @@ export const fetchCocktail = itemId => {
     }
 };
 
-export const addCocktail = itemData => {
+export const addCocktail = cocktailData => {
     return async dispatch => {
         dispatch(addDataRequest());
 
         try {
-            const response = await axios.post('/cocktails', itemData);
+            const response = await axios.post('/cocktails', cocktailData);
 
             dispatch(addDataSuccess());
             NotificationManager.success(response.data.message);

@@ -8,6 +8,7 @@ import {Route, Switch, withRouter} from "react-router";
 import {Col, Container, Row} from "reactstrap";
 import Toolbar from "./components/UI/Toolbar/Toolbar";
 import Login from "./containers/Login/Login";
+import NewCocktail from "./containers/NewCocktail/NewCocktail";
 
 class App extends Component {
     render() {
@@ -24,6 +25,7 @@ class App extends Component {
                             <Switch>
                                  <Route path="/" exact component={Items}/>
                                   <Route path="/login" component={Login}/>
+                                  <Route path="/cocktails/new" exact component={NewCocktail}/>
                             </Switch>
                         </Col>
                     </Row>
