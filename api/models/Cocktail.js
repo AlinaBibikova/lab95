@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const CocktailSchema = new Schema ({
+const CocktailSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User',
     },
-    nameCocktail: {
+    name: {
         type: String,
         required: true,
     },
@@ -22,14 +22,20 @@ const CocktailSchema = new Schema ({
         enum: [true, false]
     },
     ingredients: [
-        {nameIngredient: String,
-        amount: String,
-        position: {type: Number, required: true}}
-        ],
-    rating: [{userId: String,
-         grade: String}]
+        {
+            name: String,
+            amount: String,
+            position: {type: Number, required: true}
+        }
+    ],
+    rating: [
+        {
+            userId: String,
+            grade: String
+        }
+    ]
 });
 
-const Item = mongoose.model('Item', CocktailSchema);
+const Cocktail = mongoose.model('Cocktail', CocktailSchema);
 
-module.exports = Item;
+module.exports = Cocktail;

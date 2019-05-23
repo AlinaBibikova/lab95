@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 const permit = require('../middleware/permit');
 const checkUser = require('../middleware/checkUser');
 
-const Cocktail = require('../models/Item');
+const Cocktail = require('../models/Cocktail');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -97,3 +97,5 @@ router.post('/:id/toggle_publish', [auth, permit('admin')], async (req, res) => 
         return res.sendStatus(400);
     }
 });
+
+module.exports = router;

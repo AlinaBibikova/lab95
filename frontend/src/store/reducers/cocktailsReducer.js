@@ -4,18 +4,18 @@ import {
     ADD_DATA_SUCCESS,
     FETCH_DATA_FAILURE,
     FETCH_DATA_REQUEST,
-    FETCH_ITEM_SUCCESS,
-    FETCH_ITEMS_SUCCESS
+    FETCH_COCKTAIL_SUCCESS,
+    FETCH_COCKTAILS_SUCCESS
 } from "../actions/actionTypes";
 
 const initialState = {
-    items: [],
-    item: {},
+    cocktails: [],
+    cocktail: {},
     loading: true,
     error: null
 };
 
-const itemsReducer = (state = initialState, action) => {
+const cocktailsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_DATA_REQUEST:
             return {...state, loading: true};
@@ -23,11 +23,11 @@ const itemsReducer = (state = initialState, action) => {
         case FETCH_DATA_FAILURE:
             return {...state, loading: false, error: action.error};
 
-        case FETCH_ITEMS_SUCCESS:
-            return {...state, loading: false, items: action.items};
+        case FETCH_COCKTAILS_SUCCESS:
+            return {...state, loading: false, cocktails: action.cocktails};
 
-        case FETCH_ITEM_SUCCESS:
-            return {...state, loading: false, item: action.item};
+        case FETCH_COCKTAIL_SUCCESS:
+            return {...state, loading: false, cocktail: action.cocktail};
 
         case ADD_DATA_REQUEST:
             return {...state, loading: true};
@@ -43,4 +43,4 @@ const itemsReducer = (state = initialState, action) => {
     }
 };
 
-export default itemsReducer;
+export default cocktailsReducer;

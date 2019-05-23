@@ -4,22 +4,22 @@ import {NavLink as RouterNavLink} from "react-router-dom";
 
 import {apiURL} from "../../constants";
 
-const ListItem = props => {
+const ListCocktail = props => {
     return (
         <Col xs="12" sm="6" md="4">
             <Card className="mb-3">
                 {props.image
-                    ? <RouterNavLink to={`/items/${props.id}`}>
-                        <CardImg top width="100%" src={`${apiURL}/uploads/${props.image}`} alt={props.nameCocktail}/>
+                    ? <RouterNavLink to={`/cocktails/${props.id}`}>
+                        <CardImg top width="100%" src={`${apiURL}/uploads/${props.image}`} alt={props.name}/>
                     </RouterNavLink>
                     : null
                 }
                 <CardBody>
                     <CardTitle
                         tag={RouterNavLink}
-                        to={`/items/${props.id}`}
+                        to={`/cocktails/${props.id}`}
                     >
-                        {props.nameCocktail}
+                        {props.name}
                     </CardTitle>
                     <CardText>{props.user}</CardText>
                 </CardBody>
@@ -28,4 +28,4 @@ const ListItem = props => {
     );
 };
 
-export default ListItem;
+export default ListCocktail;

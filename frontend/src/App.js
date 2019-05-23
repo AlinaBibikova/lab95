@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './App.css';
 import {NotificationContainer} from "react-notifications";
-import Items from "./containers/Items/Items";
+import Items from "./containers/Cocktails/Cocktails";
 import {logoutUser} from "./store/actions/usersActions";
 import {connect} from "react-redux";
 import {Route, Switch, withRouter} from "react-router";

@@ -11,8 +11,8 @@ import {
     DELETE_DATA_SUCCESS,
     FETCH_DATA_FAILURE,
     FETCH_DATA_REQUEST,
-    FETCH_ITEM_SUCCESS,
-    FETCH_ITEMS_SUCCESS
+    FETCH_COCKTAIL_SUCCESS,
+    FETCH_COCKTAILS_SUCCESS
 } from "./actionTypes";
 
 const fetchDataRequest = () => ({type: FETCH_DATA_REQUEST});
@@ -26,47 +26,41 @@ const deleteDataRequest = () => ({type: DELETE_DATA_REQUEST});
 const deleteDataFailure = error => ({type: DELETE_DATA_FAILURE, error});
 const deleteDataSuccess = () => ({type: DELETE_DATA_SUCCESS});
 
-const fetchItemsSuccess = items => ({type: FETCH_ITEMS_SUCCESS, items});
-const fetchItemSuccess = item => ({type: FETCH_ITEM_SUCCESS, item});
+const fetchCocktailsSuccess = cocktails => ({type: FETCH_COCKTAILS_SUCCESS, cocktails});
+const fetchCocktailSuccess = cocktail => ({type: FETCH_COCKTAIL_SUCCESS, cocktail});
 
-export const fetchItems = () => {
-    return async (dispatch, getState) => {
-        const token = getState().users.user.token;
-        const config = {headers: {'Authorization': token}};
-
-        dispatch(fetchDataRequest());
-
-        try {
-            const response = await axios.get('/items', config);
-            dispatch(fetchItemsSuccess(response.data));
-        } catch (e) {
-            dispatch(fetchDataFailure(e));
-        }
-    }
-};
-
-export const fetchItem = itemId => {
+export const fetchCocktails = () => {
     return async dispatch => {
         dispatch(fetchDataRequest());
 
         try {
-            const response = await axios.get(`/items/${itemId}`);
-            dispatch(fetchItemSuccess(response.data));
+            const response = await axios.get('/cocktails');
+            dispatch(fetchCocktailsSuccess(response.data));
         } catch (e) {
             dispatch(fetchDataFailure(e));
         }
     }
 };
 
-export const addItem = itemData => {
-    return async (dispatch, getState) => {
-        const token = getState().users.user.token;
-        const config = {headers: {'Authorization': token}};
+export const fetchCocktail = itemId => {
+    return async dispatch => {
+        dispatch(fetchDataRequest());
 
+        try {
+            const response = await axios.get(`/cocktails/${itemId}`);
+            dispatch(fetchCocktailSuccess(response.data));
+        } catch (e) {
+            dispatch(fetchDataFailure(e));
+        }
+    }
+};
+
+export const addCocktail = itemData => {
+    return async dispatch => {
         dispatch(addDataRequest());
 
         try {
-            const response = await axios.post('/items', itemData, config);
+            const response = await axios.post('/cocktails', itemData);
 
             dispatch(addDataSuccess());
             NotificationManager.success(response.data.message);
@@ -77,15 +71,12 @@ export const addItem = itemData => {
     }
 };
 
-export const deleteItem = itemId => {
-    return async (dispatch, getState) => {
-        const token = getState().users.user.token;
-        const config = {headers: {'Authorization': token}};
-
+export const deleteCocktail = cocktailId => {
+    return async dispatch => {
         dispatch(deleteDataRequest());
 
         try {
-            const response = await axios.delete(`/items/${itemId}`, config);
+            const response = await axios.delete(`/cocktails/${cocktailId}`);
 
             dispatch(deleteDataSuccess());
             NotificationManager.success(response.data.message);
@@ -98,13 +89,11 @@ export const deleteItem = itemId => {
 };
 
 export const togglePublish = id => {
-    return async (dispatch, getState) => {
-        const token = getState().users.user.token;
-        const config = {headers: {'Authorization': token}};
+    return async dispatch => {
 
         try {
-            await axios.post(`/items/${id}/toggle_publish`, config);
-            dispatch(fetchItems());
+            await axios.post(`/cocktails/${id}/toggle_publish`);
+            dispatch(fetchCocktails());
         } catch (e) {
             console.log(e);
         }
