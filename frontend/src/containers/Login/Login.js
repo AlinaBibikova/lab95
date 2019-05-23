@@ -34,7 +34,7 @@ class Login extends Component {
                         </Alert>
                     )}
                     <Form onSubmit={this.submitFormHandler}>
-                        <FormGroup>
+                        <FormGroup className="mt-4">
                             <FacebookLogin/>
                         </FormGroup>
 

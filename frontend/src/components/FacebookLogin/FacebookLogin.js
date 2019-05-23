@@ -23,7 +23,7 @@ class Facebooklogin extends Component {
                 callback={this.facebookLogin}
                 fields="name,email,picture"
                 render={renderProps => (
-                    <Button onClick={renderProps.onClick} color="info">
+                    <Button onClick={renderProps.onClick} color="info" className="w-100">
                         Login with facebook
                     </Button>
                 )}
