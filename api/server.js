@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const users = require('./routes/users');
-const cocktails = require('./routes/cocktails');
+const items = require('./routes/items');
 
 app.use(cors());
 
@@ -17,7 +17,7 @@ const port = 8000;
 
 mongoose.connect(config.dbUrl, config.mongoOptions).then( () => {
     app.use('/users', users);
-    app.use('/cocktails', cocktails);
+    app.use('/items', items);
 });
 
 app.listen(port, () => {

@@ -31,9 +31,6 @@ const deleteDataSuccess = () => ({type: DELETE_DATA_SUCCESS});
 const fetchItemsSuccess = items => ({type: FETCH_ITEMS_SUCCESS, items});
 const fetchItemSuccess = item => ({type: FETCH_ITEM_SUCCESS, item});
 
-export const createPublishItemSuccess = () => ({type: CREATE_PUBLISH_ITEM_SUCCESS});
-export const createPublishItemFailure = error => ({type: CREATE_PUBLISH_ITEM_FAILURE, error});
-
 export const fetchItems = () => {
     return async (dispatch, getState) => {
         const token = getState().users.user.token;
@@ -102,17 +99,16 @@ export const deleteItem = itemId => {
     }
 };
 
-export const createPublishItem = (id, data) => {
+export const togglePublish = id => {
     return async (dispatch, getState) => {
         const token = getState().users.user.token;
         const config = {headers: {'Authorization': token}};
 
         try {
-            await axios.post(`/items/publish/${id.item}`, {status: data}, config);
-            dispatch(createPublishItemSuccess());
-            dispatch(fetchItems(id.item))
-        } catch (error) {
-            dispatch(createPublishItemFailure(error));
+            await axios.post(`/items/${id}/toggle_publish`, config);
+            dispatch(fetchItems());
+        } catch (e) {
+            console.log(e);
         }
-    };
+    }
 };

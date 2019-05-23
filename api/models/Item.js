@@ -30,6 +30,6 @@ const CocktailSchema = new Schema ({
          grade: String}]
 });
 
-const Cocktail = mongoose.model('Cocktail', CocktailSchema);
+const Item = mongoose.model('Item', CocktailSchema);
 
-module.exports = Cocktail;
+module.exports = Item;

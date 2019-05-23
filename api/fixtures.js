@@ -3,7 +3,7 @@ const config = require('./config');
 const nanoid = require("nanoid");
 
 const User = require('./models/User');
-const Cocktail = require('./models/Cocktail');
+const Cocktail = require('./models/Item');
 
 
 const run = async () => {
