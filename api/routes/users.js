@@ -38,7 +38,6 @@ router.post('/facebookLogin', async (req, res) => {
 
     try {
         const response = await axios.get(debugTokenUrl);
-
         const responseData = response.data;
 
         if (responseData.data.error) {
@@ -53,7 +52,7 @@ router.post('/facebookLogin', async (req, res) => {
 
         if (!user) {
             user = new User({
-                username: (req.body.email ||req.body.name) || req.body.id,
+                username: req.body.email || req.body.id,
                 displayName: req.body.name || 'Anonymous',
                 avatar: req.body.picture.data.url,
                 password: nanoid(),
@@ -66,8 +65,8 @@ router.post('/facebookLogin', async (req, res) => {
         await user.save();
 
         return res.send({message: 'Login or register successful!', user});
-    } catch (e) {
-        return res.status(500).send({error: 'Something went wrong'});
+    } catch (error) {
+        return res.status(500).send({error});
     }
 });
 

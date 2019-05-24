@@ -19,18 +19,18 @@ const run = async () => {
 
     const [user, admin] = await User.create({
             avatar: 'avatar.png',
-            username: 'user',
+            username: 'pmwtypecfy_1558630276@tfbnw.net',
             password: '123',
-            displayName: 'Don Joe',
+            displayName: 'Joshua Alcgbdbijdda',
             role: 'user',
             token: nanoid()
 
         },
         {
             avatar: 'avatar.png',
-            username: 'admin',
+            username: 'hzscddnpmt_1558630272@tfbnw.net',
             password: '123',
-            displayName: 'Jack Dan',
+            displayName: 'Maria Alcgbecfdcgfa',
             role: 'admin',
             token: nanoid()
         });
@@ -44,14 +44,14 @@ const run = async () => {
                 '\n' + '2. Полученную смесь перелить в высокий бокал.\n' + '\n' +
                 '3. Украсить коктейль вишенкой, долькой ананаса или взбитыми сливками.\n' +
                 '\n' + '4. Подавать вместе с трубочкой.',
-            published: true,
+            isPublished: true,
             ingredients: [
-             {position: 1, ingredientName: 'Светлый (белый) ром', amount: '30 мл'},
-             {position: 2, ingredientName: 'Ананасовый сок', amount: '90 мл'},
-             {position: 3, ingredientName: 'Кокосовое молоко (ликер Малибу)', amount: '30 мл'},
-             {position: 4, ingredientName: 'Лед в кубиках', amount: '50 грамм'},
-             {position: 5, ingredientName: 'Сливки (11-15% жирности)', amount: '20 мл (необязательно)'},
-             {position: 6, ingredientName: 'Ломтик ананаса или коктейльная вишенка', amount: '1 штука'},
+             {name: 'Светлый (белый) ром', amount: '30 мл'},
+             {name: 'Ананасовый сок', amount: '90 мл'},
+             {name: 'Кокосовое молоко (ликер Малибу)', amount: '30 мл'},
+             {name: 'Лед в кубиках', amount: '50 грамм'},
+             {name: 'Сливки (11-15% жирности)', amount: '20 мл (необязательно)'},
+             {name: 'Ломтик ананаса или коктейльная вишенка', amount: '1 штука'},
              ]
          },
 
@@ -67,14 +67,14 @@ const run = async () => {
                  'Долей содовую доверху и аккуратно размешай коктейльной ложкой\n' +
                  'Досыпь немного дробленого льда\n' +
                  'Укрась веточкой мяты и долькой лайма',
-             published: false,
+            isPublished: false,
              ingredients: [
-                 {position: 1, name: 'Лайм', amount: '3 шт'},
-                 {position: 2, name: 'Сахар тростниковый', amount: '4 ч.л.'},
-                 {position: 3, name: 'Мята свежая', amount: '20-24 листика'},
-                 {position: 4, name: 'Ром белый (для алкогольного коктейля)', amount: '50 мл'},
-                 {position: 5, name: 'Вода газированная', amount: '20 мл (необязательно)'},
-                 {position: 6, name: 'Лёд', amount: '4 штуки'},
+                 {name: 'Лайм', amount: '3 шт'},
+                 {name: 'Сахар тростниковый', amount: '4 ч.л.'},
+                 {name: 'Мята свежая', amount: '20-24 листика'},
+                 {name: 'Ром белый', amount: '50 мл'},
+                 {name: 'Вода газированная', amount: '20 мл (необязательно)'},
+                 {name: 'Лёд', amount: '4 штуки'},
              ]
          },
          );

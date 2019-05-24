@@ -16,7 +16,7 @@ const CocktailSchema = new Schema({
         type: String,
         required: true,
     },
-    published: {
+    isPublished: {
         type: Boolean,
         default: false,
         enum: [true, false]
@@ -25,7 +25,6 @@ const CocktailSchema = new Schema({
         {
             name: String,
             amount: String,
-            position: {type: Number, required: true}
         }
     ],
     rating: [

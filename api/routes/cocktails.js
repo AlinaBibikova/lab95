@@ -1,11 +1,12 @@
 const express = require('express');
 const multer = require('multer');
-const config = require('../config');
 const nanoid = require('nanoid');
+const path = require('path');
+
+const config = require('../config');
 const auth = require('../middleware/auth');
 const permit = require('../middleware/permit');
 const checkUser = require('../middleware/checkUser');
-
 const Cocktail = require('../models/Cocktail');
 
 const storage = multer.diskStorage({
@@ -28,8 +29,8 @@ router.get('/', checkUser, async (req, res) => {
     }
 
     try {
-        const cocktail = await Cocktail.find(criteria);
-        return res.send(cocktail);
+        const cocktails = await Cocktail.find(criteria);
+        return res.send(cocktails);
     } catch {
         return res.sendStatus(500);
     }
@@ -57,7 +58,13 @@ router.get('/:id', checkUser, async (req, res) => {
 });
 
 router.post('/', auth, upload.single('image'), async (req, res) => {
-    const cocktailData = req.body;
+    const cocktailData = {
+        name: req.body.name,
+        ingredients: JSON.parse(req.body.ingredients),
+        recipe: req.body.recipe,
+        user: req.user._id
+    };
+    
     if (req.file) {
         cocktailData.image = req.file.filename;
     }
@@ -66,16 +73,16 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
         const cocktail = new Cocktail(cocktailData);
 
         await cocktail.save();
-        return res.send({message: 'Cocktail added!', artist: cocktail});
-    } catch {
-        return res.sendStatus(400);
+        return res.send({message: 'Cocktail added!', cocktail});
+    } catch (error) {
+        return res.status(400).send(error);
     }
 });
 
 router.delete('/:id', [auth, permit('admin')], async (req, res) => {
     try {
         await Cocktail.deleteOne({_id: req.params.id});
-        return res.sendStatus(200);
+        return res.status(200).send({message: 'Cocktail deleted!'});
     } catch {
         return res.status(400);
     }

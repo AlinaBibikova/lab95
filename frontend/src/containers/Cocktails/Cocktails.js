@@ -3,7 +3,7 @@ import {Row} from "reactstrap";
 import {connect} from "react-redux";
 import {togglePublish, deleteCocktail, fetchCocktails} from "../../store/actions/cocktailsActions";
 import Loader from "../../components/UI/Loader/Loader";
-import ListCocktail from "../../components/ListCocktail/ListCocktail";
+import CocktailsList from "../../components/ListCocktail/CocktailsList";
 
 class Cocktails extends Component {
 
@@ -12,17 +12,17 @@ class Cocktails extends Component {
     }
 
     render() {
-        console.log(this.props.cocktails);
         return (
             <Row>
                 {this.props.loading && <Loader/>}
 
                 {this.props.cocktails.map(cocktail => (
-                    <ListCocktail
+                    <CocktailsList
                         key={cocktail._id}
                         id={cocktail._id}
-                        nameCocktail={cocktail.name}
+                        name={cocktail.name}
                         image={cocktail.image}
+                        isPublished={cocktail.isPublished}
                         user={this.props.user}
                         onDelete={() => this.props.deleteItem(cocktail._id)}
                         onTogglePublish={() => this.props.togglePublish(cocktail._id)}

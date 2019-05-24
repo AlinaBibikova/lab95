@@ -5,7 +5,7 @@ import {Button} from "reactstrap";
 import {connect} from "react-redux";
 import {facebookLogin} from "../../store/actions/usersActions";
 
-class Facebooklogin extends Component {
+class FacebookLogin extends Component {
     facebookLogin = data => {
         if (data.error) {
             NotificationManager.error('Something went wrong!')
@@ -19,7 +19,7 @@ class Facebooklogin extends Component {
     render() {
         return (
             <FacebookLoginButton
-                appId="545138079223618"
+                appId="367448963902267"
                 callback={this.facebookLogin}
                 fields="name,email,picture"
                 render={renderProps => (
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(null, mapDispatchToProps)(Facebooklogin);
+export default connect(null, mapDispatchToProps)(FacebookLogin);

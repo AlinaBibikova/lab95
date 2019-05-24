@@ -79,6 +79,7 @@ export const deleteCocktail = cocktailId => {
             const response = await axios.delete(`/cocktails/${cocktailId}`);
 
             dispatch(deleteDataSuccess());
+            dispatch(fetchCocktails());
             NotificationManager.success(response.data.message);
             dispatch(push('/'));
         } catch (e) {
