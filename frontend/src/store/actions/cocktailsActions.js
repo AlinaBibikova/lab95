@@ -42,12 +42,12 @@ export const fetchCocktails = () => {
     }
 };
 
-export const fetchCocktail = itemId => {
+export const fetchCocktail = cocktailId => {
     return async dispatch => {
         dispatch(fetchDataRequest());
 
         try {
-            const response = await axios.get(`/cocktails/${itemId}`);
+            const response = await axios.get(`/cocktails/${cocktailId}`);
             dispatch(fetchCocktailSuccess(response.data));
         } catch (e) {
             dispatch(fetchDataFailure(e));
