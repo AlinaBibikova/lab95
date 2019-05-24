@@ -28,6 +28,11 @@ router.get('/', checkUser, async (req, res) => {
         delete criteria.isPublished
     }
 
+    if (req.query.user) {
+        delete criteria.isPublished;
+        criteria.user = req.query.user;
+    }
+
     try {
         const cocktails = await Cocktail.find(criteria);
         return res.send(cocktails);
@@ -39,9 +44,14 @@ router.get('/', checkUser, async (req, res) => {
 router.get('/:id', checkUser, async (req, res) => {
     const criteria = {isPublished: true, _id: req.params.id};
 
-    if (req.user && req.user.role === 'admin') {
-        delete criteria.isPublished
-    }
+    if (req.user) {
+        delete criteria.isPublished;
+        criteria.user = req.user  
+        
+        if (req.user.role === 'admin') {
+            delete criteria.user;
+        }
+    } 
 
     try {
         const cocktail = await Cocktail.findOne(criteria);
@@ -49,11 +59,11 @@ router.get('/:id', checkUser, async (req, res) => {
         if (cocktail) {
             return res.send(cocktail);
         } else {
-            return res.sendStatus(404);
+            return res.status(404).send({message: 'Cocktail not found!'});
         }
 
     } catch {
-        return res.sendStatus(500);
+        return res.status(404).send({message: 'Cocktail not found!'});
     }
 });
 

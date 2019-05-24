@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
-import {NavItem, NavLink} from "reactstrap";
-import {NavLink as RouterNavLink} from "react-router-dom";
+import {NavItem} from "reactstrap";
+import FacebookLogin from "../../../FacebookLogin/FacebookLogin";
 
 const AnonymousMenu = () => (
     <Fragment>
         <NavItem>
-            <NavLink tag={RouterNavLink} to="/login">Login</NavLink>
+            <FacebookLogin/>
         </NavItem>
     </Fragment>
 );

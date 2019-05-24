@@ -29,12 +29,18 @@ const deleteDataSuccess = () => ({type: DELETE_DATA_SUCCESS});
 const fetchCocktailsSuccess = cocktails => ({type: FETCH_COCKTAILS_SUCCESS, cocktails});
 const fetchCocktailSuccess = cocktail => ({type: FETCH_COCKTAIL_SUCCESS, cocktail});
 
-export const fetchCocktails = () => {
+export const fetchCocktails = user => {
+    let url = '/cocktails';
+
+    if (user) {
+        url += `?user=${user}`
+    }
+
     return async dispatch => {
         dispatch(fetchDataRequest());
 
         try {
-            const response = await axios.get('/cocktails');
+            const response = await axios.get(url);
             dispatch(fetchCocktailsSuccess(response.data));
         } catch (e) {
             dispatch(fetchDataFailure(e));
@@ -50,6 +56,7 @@ export const fetchCocktail = cocktailId => {
             const response = await axios.get(`/cocktails/${cocktailId}`);
             dispatch(fetchCocktailSuccess(response.data));
         } catch (e) {
+            NotificationManager.error(e.response.data.message);
             dispatch(fetchDataFailure(e));
         }
     }

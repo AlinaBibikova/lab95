@@ -1,26 +1,19 @@
 import React from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 
-// import Register from "./containers/Register/Register";
-import Login from "./containers/Login/Login";
 import Cocktails from "./containers/Cocktails/Cocktails";
 import NewCocktail from "./containers/NewCocktail/NewCocktail";
 import Cocktail from "./containers/Cocktail/Cocktail";
+import MyCocktails from "./containers/MyCocktails/MyCocktails";
 
 const ProtectedRoute = ({isAllowed, ...props}) => (
-    isAllowed ? <Route {...props} /> : <Redirect to="/login" />
+    isAllowed ? <Route {...props} /> : <Redirect to="/" />
 );
 
 const Routes = ({user}) => {
     return (
         <Switch>
-
-            <ProtectedRoute
-                isAllowed={user}
-                path="/"
-                exact
-                component={Cocktails}
-            />
+            <Route path="/" exact component={Cocktails}/>
             <ProtectedRoute
                 isAllowed={user}
                 path="/cocktails/new"
@@ -29,12 +22,11 @@ const Routes = ({user}) => {
             />
             <ProtectedRoute
                 isAllowed={user}
-                path="/cocktails/:id"
+                path="/cocktails/mine"
                 exact
-                component={Cocktail}
+                component={MyCocktails}
             />
-
-            <Route path="/login" component={Login}/>
+            <Route path="/cocktails/:id" component={Cocktail}/>
         </Switch>
     );
 };

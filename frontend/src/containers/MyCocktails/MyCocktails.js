@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import {Row} from "reactstrap";
 import {connect} from "react-redux";
-import {togglePublish, deleteCocktail, fetchCocktails} from "../../store/actions/cocktailsActions";
+import {fetchCocktails} from "../../store/actions/cocktailsActions";
 import Loader from "../../components/UI/Loader/Loader";
 import CocktailsListItem from "../../components/ListCocktail/CocktailsListItem";
+import {Row} from "reactstrap";
 
-class Cocktails extends Component {
-
+class MyCocktails extends Component {
     componentDidMount() {
-        this.props.fetchCocktails();
+        this.props.fetchCocktails(this.props.user._id);
     }
 
+
     render() {
+
         return (
             <Row>
                 {this.props.loading && <Loader/>}
@@ -41,9 +42,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchCocktails: () => dispatch(fetchCocktails()),
-    deleteItem: id => dispatch(deleteCocktail(id)),
-    togglePublish: id => dispatch(togglePublish(id))
+    fetchCocktails: user => dispatch(fetchCocktails(user))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cocktails);
+export default connect(mapStateToProps, mapDispatchToProps)(MyCocktails);

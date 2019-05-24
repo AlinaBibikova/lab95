@@ -6,29 +6,16 @@ const User = require('../models/User');
 const router = express.Router();
 const config = require('../config');
 
-router.post('/sessions', async (req, res) => {
-    const user = await User.findOne({username: req.body.username});
-    if (!user) return res.status(400).send({message: 'Username or Password incorrect!'});
-
-    const isMatch = await user.checkPassword(req.body.password);
-    if (!isMatch) return res.status(400).send({message: 'Username or Password incorrect!'});
-
-    user.generateToken();
-    await user.save();
-
-    return res.send({message: 'Login successful!', user});
-});
-
 router.delete('/sessions', async (req, res) => {
     const token = req.get("Authorization");
-    if(!token) return res.send({message: "OK"});
+    if(!token) return res.send({message: "Logout successfull"});
 
     const user = await User.findOne({token: token});
-    if(!user) return res.send({message: 'OK'});
+    if(!user) return res.send({message: 'Logout successfull'});
 
     await user.save();
 
-    return res.send({message: 'OK'});
+    return res.send({message: 'Logout successfull!'});
 });
 
 router.post('/facebookLogin', async (req, res) => {
@@ -52,14 +39,13 @@ router.post('/facebookLogin', async (req, res) => {
 
         if (!user) {
             user = new User({
-                username: req.body.email || req.body.id,
-                displayName: req.body.name || 'Anonymous',
-                avatar: req.body.picture.data.url,
-                password: nanoid(),
                 facebookId: req.body.id
             });
         }
 
+        user.username = req.body.email || req.body.id;
+        user.displayName = req.body.name;
+        user.avatar = req.body.picture.data.url;
         user.generateToken();
 
         await user.save();

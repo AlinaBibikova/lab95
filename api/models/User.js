@@ -10,44 +10,25 @@ const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
-        validate: {
-            validator: async function (value)  {
-                if (!this.isModified('username')) return;
-
-                const user = await User.findOne({username: value});
-                if (user) throw new Error();
-            },
-            message: 'This user is already registered!'
-        }
     },
-
     displayName: {
         type: String,
         required: true
     },
-
-    password: {
-        type: String,
-        required: true
-    },
-
     avatar: String,
-
     role: {
         type: String,
-        required: true,
         default: 'user',
         enum: ['user', 'admin']
     },
-
     token: {
         type: String,
         required: true
     },
-
     facebookId: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     }
 });
 

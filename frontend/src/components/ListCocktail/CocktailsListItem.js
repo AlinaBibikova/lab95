@@ -1,16 +1,20 @@
 import React from 'react';
-import {Button, Card, CardBody, CardFooter, CardImg, CardTitle, Col} from "reactstrap";
+import {Badge, Button, Card, CardBody, CardFooter, CardImg, CardTitle, Col} from "reactstrap";
 import {NavLink as RouterNavLink} from "react-router-dom";
 
 import {apiURL} from "../../constants";
 
-const CocktailsList = props => {
+const CocktailsListItem = props => {
     return (
         <Col xs="12" sm="6" md="4">
             <Card className="mb-3">
                 {props.image
-                    ? <RouterNavLink to={`/cocktails/${props.id}`}>
-                        <CardImg top width="100%" src={`${apiURL}/uploads/${props.image}`} alt={props.name}/>
+                    ? <RouterNavLink to={`/cocktails/${props.id}`} className="card-img-wrap">
+                        {!props.isPublished
+                            ? <Badge color="warning">Unpublished</Badge>
+                            : null
+                        }
+                        <CardImg src={`${apiURL}/uploads/${props.image}`} alt={props.name}/>
                     </RouterNavLink>
                     : null
                 }
@@ -37,4 +41,4 @@ const CocktailsList = props => {
     );
 };
 
-export default CocktailsList;
+export default CocktailsListItem;

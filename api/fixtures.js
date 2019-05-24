@@ -18,20 +18,18 @@ const run = async () => {
     }
 
     const [user, admin] = await User.create({
-            avatar: 'avatar.png',
-            username: 'pmwtypecfy_1558630276@tfbnw.net',
-            password: '123',
+            username: 'joshua_oliyaxl_alcgbdbijddaa@tfbnw.net',
             displayName: 'Joshua Alcgbdbijdda',
             role: 'user',
+            facebookId: '100037242904411',
             token: nanoid()
 
         },
         {
-            avatar: 'avatar.png',
-            username: 'hzscddnpmt_1558630272@tfbnw.net',
-            password: '123',
+            username: 'maria_xkiwwhf_alcgbecfdcgfa@tfbnw.net',
             displayName: 'Maria Alcgbecfdcgfa',
             role: 'admin',
+            facebookId: '101412127777242',
             token: nanoid()
         });
 
