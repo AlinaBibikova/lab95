@@ -10,12 +10,12 @@ const CocktailsListItem = props => {
             <Card className="mb-3">
                 {props.image
                     ? <RouterNavLink to={`/cocktails/${props.id}`} className="card-img-wrap">
-                        {!props.isPublished
-                            ? <Badge color="warning">Unpublished</Badge>
-                            : null
-                        }
                         <CardImg src={`${apiURL}/uploads/${props.image}`} alt={props.name}/>
                     </RouterNavLink>
+                    : null
+                }
+                {!props.isPublished
+                    ? <Badge color="warning">Unpublished</Badge>
                     : null
                 }
                 <CardBody>
